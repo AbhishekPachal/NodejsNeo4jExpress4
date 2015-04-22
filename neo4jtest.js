@@ -29,7 +29,7 @@ if ('development' == env) {
 }
 
 app.route('/api').get(function (req, res) {
-  res.send('REST API is running');
+  res.send('Our Sample API is up...');
 });
 
 app.route('/friendoffriend/:username').get(function (req, res){
@@ -40,9 +40,7 @@ app.route('/friendoffriend/:username').get(function (req, res){
 		
 			graph.query(query.join('\n'), {inputusername : username, inputentitytype :type} ,function (err, results) {	
 				if (err) {
-					res.write(JSON.stringify(err));
-					//res.status(HTTPStatus.INTERNAL_SERVER_ERROR).send('Internal Server Error');
-					res.end();
+					res.status(HTTPStatus.INTERNAL_SERVER_ERROR).send('Internal Server Error');
 				}
 				else {
 					res.status(HTTPStatus.OK).send(JSON.stringify(results));
